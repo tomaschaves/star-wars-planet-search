@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import propTypes from 'prop-types';
 import starWarsContext from './starWarsContext';
 import fetchAPI from '../services/fetchAPI';
 
-// const INITIAL_STATE = { nome: 'Xablau', idade: 100 };
-
 function Provider({ children }) {
   const [stateAPI, setStateAPI] = useState([]);
+  const [searchText, setSearchText] = useState([]);
+  let planetsToShow = useMemo(() => ([]), []);
 
   const resultsFetchAPI = async () => {
     const returnAPI = await fetchAPI();
@@ -17,8 +17,22 @@ function Provider({ children }) {
     resultsFetchAPI();
   }, []);
 
+  if (searchText.length === 0) {
+    planetsToShow = stateAPI;
+  } else {
+    planetsToShow = searchText;
+  }
+  console.log(planetsToShow);
+
+  const contextValue = useMemo(() => ({
+    stateAPI,
+    planetsToShow,
+    searchText,
+    setSearchText,
+  }), [stateAPI, planetsToShow, searchText]);
+
   return (
-    <starWarsContext.Provider value={ stateAPI }>
+    <starWarsContext.Provider value={ contextValue }>
       {children}
     </starWarsContext.Provider>
   );
