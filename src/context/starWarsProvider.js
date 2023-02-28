@@ -5,8 +5,9 @@ import fetchAPI from '../services/fetchAPI';
 
 function Provider({ children }) {
   const [stateAPI, setStateAPI] = useState([]);
-  const [searchText, setSearchText] = useState([]);
+  const [searchedArray, setsearchedArray] = useState([]);
   let planetsToShow = useMemo(() => ([]), []);
+  const [filterByFilters, setFilterByFilters] = useState([]);
 
   const resultsFetchAPI = async () => {
     const returnAPI = await fetchAPI();
@@ -17,19 +18,24 @@ function Provider({ children }) {
     resultsFetchAPI();
   }, []);
 
-  if (searchText.length === 0) {
+  // useEffect(() => {
+  if (searchedArray.length === 0) {
     planetsToShow = stateAPI;
   } else {
-    planetsToShow = searchText;
+    planetsToShow = searchedArray;
   }
+  // }, [planetsToShow]);
+
   console.log(planetsToShow);
 
   const contextValue = useMemo(() => ({
     stateAPI,
     planetsToShow,
-    searchText,
-    setSearchText,
-  }), [stateAPI, planetsToShow, searchText]);
+    searchedArray,
+    filterByFilters,
+    setsearchedArray,
+    setFilterByFilters,
+  }), [stateAPI, planetsToShow, filterByFilters, searchedArray]);
 
   return (
     <starWarsContext.Provider value={ contextValue }>
