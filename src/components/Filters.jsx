@@ -21,10 +21,6 @@ export default function Filters() {
 
   const [filterValues, setFilterValues] = useState(arrayColumns);
 
-  // const filteredOptions = () => filterValues
-  //   .filter((element) => filterByFilters
-  //     .forEach((selectedFilter) => selectedFilter.column === element));
-
   return (
     <div>
       <textarea

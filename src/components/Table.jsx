@@ -19,17 +19,11 @@ export default function Table() {
           return true;
         }
       });
-      // console.log(filterPlanet);
       return filterPlanet.every((element) => element);
     });
-    // const planetsToShow
     return filterByConditions;
-    // return filterByConditions;
   };
 
-  // console.log(filteredPlanetsToShow());
-  // console.log(planetsToShow);
-  // console.log('table:', filterByFilters);
   return (
     <div>
       <div>
@@ -40,7 +34,6 @@ export default function Table() {
               {filter.condition}
               {filter.value}
               <button
-                // data-testid="button-remove-filters"
                 onClick={ () => setFilterByFilters(
                   filterByFilters.filter((element) => element !== filter),
                 ) }
@@ -63,7 +56,7 @@ export default function Table() {
             <th>Name</th>
             <th>Rotation Period</th>
             <th>Orbital Period</th>
-            <th>Diamete</th>
+            <th>Diameter</th>
             <th>Climate</th>
             <th>Gravity</th>
             <th>Terrain</th>

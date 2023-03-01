@@ -18,15 +18,11 @@ function Provider({ children }) {
     resultsFetchAPI();
   }, []);
 
-  // useEffect(() => {
   if (searchedArray.length === 0) {
     planetsToShow = stateAPI;
   } else {
     planetsToShow = searchedArray;
   }
-  // }, [planetsToShow]);
-
-  console.log(planetsToShow);
 
   const contextValue = useMemo(() => ({
     stateAPI,
